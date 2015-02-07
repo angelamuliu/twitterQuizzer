@@ -22,7 +22,7 @@ function getUserTweets(user_id) {
 				$('div#front').linkify();
 				$("div#back").html(user.screen_name);
 				if (!gamestart) {
-					$("div#theSCORE").html("Score: " + score);
+					$("div#theSCORE").html("<span class=\"light_blue\">Score: </span>" + score);
 					insertChoices();
 				}
 			}
@@ -37,7 +37,7 @@ function refresh(){
 	location.reload(); 
 }
 
-
+// Sets a delay between AJAX call to get new tweet and user and update DOM
 function getUserTweetOnDelay(id) {
     setTimeout(function(){ 
     	$(".flip-container").toggleClass('buttonclicked');
@@ -61,13 +61,14 @@ function insertChoices() {
 
 		$(".flip-container").toggleClass('buttonclicked');
 
+		// Player guessed correctly!
 		if (answer_id == user.id_str){
 			$("div#theSCORE").empty();
 			score +=1;
-			$("div#theSCORE").html("Score: " + score);
+			$("div#theSCORE").html("<span class=\"light_blue\">Score: </span>" + score);
 		}
 		
-		// Only do 10 rounds, then end the game
+		// Only do n rounds, then end the game
 		if (gamerounds < 5) { //if there are more rounds left
 			user = getRandomUser(users);
 			var id = user.id;
@@ -75,9 +76,11 @@ function insertChoices() {
 
 		} else { //last round over
 			$("div#theANSWERS").fadeOut();
-			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>")
-			$("div#theSCORE").append("<a class=\"twitter-share-button\"href=\"https://twitter.com/share\" data-text=\"I received " +score+ " points for TwitterQuizzer. How well do you know your friend? \"data-via=\"twitterdev\">Tweet</a><script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,\"script\",\"twitter-wjs\"));</script>")
-			$("#refresh").click(refresh)
+
+			$("div#theSCORE").append("<div id=\"theEND\" class=\"slideUp\"></div>");
+			$("div#theEND").append("<button id=\"refresh\"> Play again </button>");
+			$("div#theEND").append("<a class=\"twitter-share-button\"href=\"https://twitter.com/share\" data-text=\"I received " +score+ " points for TwitterQuizzer. How well do you know your friend? \"data-via=\"twitterdev\">Tweet</a><script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,\"script\",\"twitter-wjs\"));</script>");
+			$("#refresh").click(refresh);
 		}
 
 
