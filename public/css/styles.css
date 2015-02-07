@@ -2,27 +2,29 @@ div#startpage {
 	height: inherit;
 }
 
-.row {
-margin-right: 0px;
-margin-left: 0px;
+.flipper {
+margin:150px;
 background: #F4F7D9;
 color: #3E423A;
 padding-bottom: 50px;
 padding-top: 50px;
 border-radius: 20px;
+
 }
 
 
 h1 {
   font-size: 40pt;
-  margin-top:5px;
-  padding-bottom:20px;
+  margin-top: 5px;
+  padding-bottom: 10px;
 }
 span#h1_twitter {
   color:#A4CFBE;
 }
-
-.glyphicon {
+.lead {
+  margin-top: 5px;
+}
+.glyphicon-heart-empty {
   font-size:100px;
 }
 
@@ -30,31 +32,37 @@ iframe#twitter-widget-0{
 margin-left: 30px;
 }
 
-button{
-background: #6C6E58;
-margin-left: 10px;
-border:0;
-}
-
-button#submit_name {
+button {
+  border: 0;
   background: #3E423A;
   margin:0;
   min-height:35px;
   min-width: 35px;
   border-bottom: 2px solid #2B2E28;
 }
-button#submit_name:hover {
+button:hover {
   text-decoration:none;
-  opacity: 1.1;
 }
-button#submit_name:active{
+button:active{
   background: #2B2E28;
- }
-
-button:hover{
-    text-decoration: underline;
-    opacity: 0.4;
 }
+
+button.answer {
+  margin:10px;
+  padding:10px;
+  color: #417378;
+  background: #F4F7D9;
+  border-bottom: 2px solid #A4CFBE;
+}
+button.answer:hover {
+  background: #CED1B7;
+  position: relative; 
+  top: -3px;
+}
+button.answer:active{
+  background: #B5B8A1;
+}
+
 
 a,
 a:focus,
@@ -67,7 +75,7 @@ input#twitter_handle {
   border: none;
   padding: 5px;
   border-bottom: 2px solid white;
-  margin-right: -2px;
+  margin-right: -3px;
   min-width: 200px;
 }
 
@@ -82,6 +90,8 @@ body {
   color: #F4F7D9;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -90,8 +100,6 @@ body {
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -105,8 +113,7 @@ body {
 /* Padding for spacing */
 .inner {
   padding: 30px;
-}
-
+}=
 
 
 
