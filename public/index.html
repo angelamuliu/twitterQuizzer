@@ -3,9 +3,42 @@
 <head>
   <meta charset="utf-8">
   <title>Test static html file.</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/js/ajax.js"></script>
 </head>
+
 <body>
-  <p> This is a test static html file.</p>
-  <p>Dodongods</p>
+
+	<div id="startpage">
+		<input id="twitter_handle" type="text"></input>
+		<button id="submit_name">Submit</button>
+	</div>
+
+	<div id="theTWEET"></div>
+	<div id="theANSWERS"></div>
+	<div id="theSCORE"></div>
+
+
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+  $("iframe").contents().find(".header").hide();
+ 
+  return t;
+  $("iframe").contents().find(".header").hide();
+}(document, "script", "twitter-wjs"));</script>
+
 </body>
+
 </html>
