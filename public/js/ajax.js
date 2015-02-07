@@ -43,7 +43,7 @@ function getUserTweetOnDelay(id) {
     	$(".flip-container").toggleClass('buttonclicked');
     	$("div#front").empty();
 		$("div#back").empty();
-    	getUserTweets(id); }, 2000);
+    	getUserTweets(id); }, 1000);
 }
 
 function insertChoices() {

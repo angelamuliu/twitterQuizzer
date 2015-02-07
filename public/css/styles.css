@@ -1,6 +1,18 @@
 div#startpage {
 	height: inherit;
 }
+
+.flipper {
+margin:150px;
+background: #F4F7D9;
+color: #3E423A;
+padding-bottom: 50px;
+padding-top: 50px;
+border-radius: 20px;
+
+}
+
+
 h1 {
   font-size: 40pt;
   margin-top: 5px;
