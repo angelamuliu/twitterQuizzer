@@ -23,7 +23,7 @@ h1 {
   margin-top: 5px;
   padding-bottom: 10px;
 }
-span#h1_twitter {
+span.light_blue {
   color:#A4CFBE;
 }
 .lead {
@@ -68,6 +68,12 @@ button.answer:active{
   background: #B5B8A1;
 }
 
+#theSCORE {
+  color: white;
+  font-size:20px;
+  margin-top:10px;
+}
+
 
 a,
 a:focus,
@@ -84,6 +90,29 @@ input#twitter_handle {
   min-width: 200px;
 }
 
+#theEND {
+  padding: 10px;
+  margin-top:10px;
+  background: #3E423A;
+  box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+}
+button#refresh {
+  color: #417378;
+  background: #F4F7D9;
+  border-bottom: 2px solid #A4CFBE;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+button#refresh:hover {
+  background: #CED1B7;
+}
+
+#theTWEET {
+  text-shadow: none;
+}
+#theTWEET a {
+  color: #417378;
+}
 
 
 html,

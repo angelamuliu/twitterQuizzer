@@ -98,12 +98,12 @@ slideUp
 	0% {
 		transform: translateY(100%);
 	}
-	50%{
+/*	50%{
 		transform: translateY(-8%);
 	}
 	65%{
 		transform: translateY(4%);
-	}
+	}*/
 	80%{
 		transform: translateY(-4%);
 	}
@@ -119,12 +119,12 @@ slideUp
 	0% {
 		-webkit-transform: translateY(100%);
 	}
-	50%{
+/*	50%{
 		-webkit-transform: translateY(-8%);
 	}
 	65%{
 		-webkit-transform: translateY(4%);
-	}
+	}*/
 	80%{
 		-webkit-transform: translateY(-4%);
 	}
