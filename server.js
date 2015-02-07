@@ -24,6 +24,14 @@ var SimpleStaticServer = function() {
   self.app.use(morgan('[:date] :method :url :status'));	// Log requests
   self.app.use(express.static(path.join(__dirname, 'public')));	// Process static files
 
+  self.app.use(function(err, req, res, next){
+    if(err.status !== 404) {
+      console.log("OHH NOOOO");
+    }
+    // console.error(err.stack);
+    // res.status(500).send('Something broke!');
+  });
+
   // Start the server (starts up the sample application).
   self.start = function() {
     self.ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -34,10 +42,14 @@ var SimpleStaticServer = function() {
       console.log('%s: Node server started on %s:%d ...', Date(Date.now() ), self.ipaddress, self.port);
     });
 
+    // Send request to twitter to get friends list of user 
     self.app.get("/startGame/:name", function(request, response) {
       var twitterhandle = request.params.name;
       client.get('friends/list', {screen_name: twitterhandle}, function(error, friends, rawresponse) {
-        if(error) throw error;
+        if(error) {
+          console.log("ERROR");
+          throw error;
+        }
           console.log(friends);
           response.end(JSON.stringify(friends));
       });
