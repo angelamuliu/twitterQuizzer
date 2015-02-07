@@ -103,6 +103,13 @@ function getRandomUser(users) {
 
 $(document).ready(function() {
 
+	// Allow user to press enter to send click start signal
+	$('#twitter_handle').keypress(function(e){
+      if(e.keyCode==13)
+      $('#submit_name').click();
+    });
+
+	// Takes input from box and attempts to start game 
 	$("#submit_name").click(function() {
 		var twittername = $("#twitter_handle").val();
 		if (twittername.length === 0 || !twittername.trim()) { // Checking if twittername is just blank spaces
