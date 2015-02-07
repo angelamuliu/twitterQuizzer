@@ -1,17 +1,48 @@
 div#startpage {
 	height: inherit;
 }
+h1 {
+  font-size: 40pt;
+  margin-top:5px;
+  padding-bottom:20px;
+}
+span#h1_twitter {
+  color:#A4CFBE;
+}
 
-/*button#submit_name {
-background: #6C6E58;
-border:0;
-}*/
+.glyphicon {
+  font-size:100px;
+}
+
+iframe#twitter-widget-0{
+margin-left: 30px;
+}
 
 button{
 background: #6C6E58;
-border:1px;
+margin-left: 10px;
+border:0;
 }
 
+button#submit_name {
+  background: #3E423A;
+  margin:0;
+  min-height:35px;
+  min-width: 35px;
+  border-bottom: 2px solid #2B2E28;
+}
+button#submit_name:hover {
+  text-decoration:none;
+  opacity: 1.1;
+}
+button#submit_name:active{
+  background: #2B2E28;
+ }
+
+button:hover{
+    text-decoration: underline;
+    opacity: 0.4;
+}
 
 a,
 a:focus,
@@ -21,7 +52,14 @@ a:hover {
 
 input#twitter_handle {
 	color:#3E423A;
+  border: none;
+  padding: 5px;
+  border-bottom: 2px solid white;
+  margin-right: -2px;
+  min-width: 200px;
 }
+
+
 
 html,
 body {

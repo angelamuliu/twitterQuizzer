@@ -1,39 +1,4 @@
 
-// Thank the lords for this code from https://gist.github.com/buu700/4200601
-(function ($) {
- 
-/**
-* @function
-* @property {object} jQuery plugin which runs handler function once specified element is inserted into the DOM
-* @param {function} handler A function to execute at the time when the element is inserted
-* @param {bool} shouldRunHandlerOnce Optional: if true, handler is unbound after its first invocation
-* @example $(selector).waitUntilExists(function);
-*/
- 
-$.fn.waitUntilExists	= function (handler, shouldRunHandlerOnce, isChild) {
-	var found	= 'found';
-	var $this	= $(this.selector);
-	var $elements	= $this.not(function () { return $(this).data(found); }).each(handler).data(found, true);
-	
-	if (!isChild)
-	{
-		(window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
-			window.setInterval(function () { $this.waitUntilExists(handler, shouldRunHandlerOnce, true); }, 500)
-		;
-	}
-	else if (shouldRunHandlerOnce && $elements.length)
-	{
-		window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
-	}
-	
-	return $this;
-}
- 
-}(jQuery));
-
-// ---------------------------------------------
-
-
 
 // Note: Users is an array of arrays that contain the actual user, this is unintentional but we'll deal
 // To acces: users[i][0] -> user object
@@ -45,23 +10,27 @@ gamerounds = 0;
 
 // Gets a single random tweet as a serverside response
 function getUserTweets(user_id) {
-	$.ajax({
-		url: '/getTweet/' + user_id,
-		type: 'GET',
-		// Update DOM with embeded tweet and choices
-		success: function(result) {
-			var tweet_text = JSON.parse(result).text;
-			var username = JSON.parse(result).screen_name;
-			$("div#front").html(tweet_text);
-			$('div#front').linkify();
-			$("div#back").html(user.screen_name);
-			console.log(gamestart);
-			if (!gamestart) {
-				$("div#theSCORE").html("Score: " + score);
-				insertChoices();
+	try {
+		$.ajax({
+			url: '/getTweet/' + user_id,
+			type: 'GET',
+			// Update DOM with embeded tweet and choices
+			success: function(result) {
+				var tweet_text = JSON.parse(result).text;
+				var username = JSON.parse(result).screen_name;
+				$("div#front").html(tweet_text);
+				$('div#front').linkify();
+				$("div#back").html(user.screen_name);
+				if (!gamestart) {
+					$("div#theSCORE").html("Score: " + score);
+					insertChoices();
+				}
 			}
-		}
-	})
+		})
+	} catch(error) {
+		console.log(error);
+
+	}
 }
 
 function refresh(){
@@ -78,12 +47,10 @@ function getUserTweetOnDelay(id) {
 }
 
 function insertChoices() {
-	console.log("INSERT CHOICES");
 	gamestart = true;
 	// Appends four buttons with usernames that serve as choices
 	for (var i=0; i<users.length; i++) {
 		var curuser = users[i][0];
-		console.log(curuser);
 		$("div#theANSWERS").append("<button class=\"answer\" id=\"" + curuser.id_str + "\">" + curuser.screen_name + "</button>");
 	}
 	// Listener that checks answer and also empties and resends AJAX request for next round
@@ -107,9 +74,9 @@ function insertChoices() {
 
 		} else { //last round over
 			$("div#theANSWERS").fadeOut();
-			//add some css changing javascript here for score??? 
-			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>");
-			$("#refresh").click(refresh);
+			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>")
+			$("div#theSCORE").append("<a class=\"twitter-share-button\"href=\"https://twitter.com/share\" data-text=\"I received " +score+ " points for TwitterQuizzer. How well do you know your friend? \"data-via=\"twitterdev\">Tweet</a><script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,\"script\",\"twitter-wjs\"));</script>")
+			$("#refresh").click(refresh)
 		}
 
 
@@ -136,20 +103,32 @@ function getRandomUser(users) {
 $(document).ready(function() {
 
 	$("#submit_name").click(function() {
-		$("#startpage").fadeOut();
 		var twittername = $("#twitter_handle").val();
-		$.ajax({ // Submit a name and get friends
-			url: '/startGame/' + twittername,
-			type: 'GET',
-			success: function(result) { // Results a JSON string of friends
-				console.log(result);
-				users = JSON.parse(result).users;
-				users = extractFour(users);
-				user = getRandomUser(users);
-				console.log(user);
-				getUserTweets(user.id);
+		if (twittername.length === 0 || !twittername.trim()) { // Checking if twittername is just blank spaces
+			alert("Please enter a valid twitter handle");
+		} else {
+			try {
+				$("#startpage").fadeOut();
+				$.ajax({ // Submit a name and get friends
+					url: '/startGame/' + twittername,
+					type: 'GET',
+					success: function(result) { // Results a JSON string of friends
+						users = JSON.parse(result).users;
+						if (users.length === 0) { // If user doesn't exist, returned response gives empty array of friends
+							alert("Please enter a valid twitter handle");
+							$("#startpage").fadeIn();
+						} else { // Continue with ajax call to grab tweets
+							users = extractFour(users);
+							user = getRandomUser(users);
+							getUserTweets(user.id);
+						}
+					}
+				})
+			} catch(error) {
+				alert("Please enter a valid twitter handle");
+				$("#startpage").fadeIn();
 			}
-		})
+		}
 	})
 
 
