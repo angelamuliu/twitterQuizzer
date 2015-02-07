@@ -12,6 +12,11 @@ border-radius: 20px;
 
 }
 
+div#theTWEET {
+padding-left: 20px;
+padding-right: 20px;
+}
+
 
 h1 {
   font-size: 40pt;
