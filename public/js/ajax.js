@@ -41,6 +41,7 @@ users = [];
 user = "not set";
 score = 0;
 gamestart = false;
+gamerounds = 0;
 
 function getUserTweets(user_id) {
 	$.ajax({
@@ -52,6 +53,7 @@ function getUserTweets(user_id) {
 			$("div#theTWEET").html(tweet_text);
 			console.log(gamestart);
 			if (!gamestart) {
+				$("div#theSCORE").html("Score: " + score);
 				insertChoices();
 			}
 		}
@@ -69,13 +71,19 @@ function insertChoices() {
 	}
 	// Listener that checks answer and also empties and resends AJAX request for next round
 	$(".answer").click(function() {
+		gamerounds += 1;
 		var answer_id = $(this).attr('id');
 		if (answer_id == user.id_str){
+			$("div#theSCORE").empty();
 			score +=1;
+			$("div#theSCORE").html("Score: " + score);
 		}
 		$("div#theTWEET").empty();
-		user = getRandomUser(users);
-		getUserTweets(user.id);
+		// Only do 10 rounds, then end the game
+		if (gamerounds < 10) {
+			user = getRandomUser(users);
+			getUserTweets(user.id);
+		}
 	});
 }
 
