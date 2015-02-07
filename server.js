@@ -46,7 +46,7 @@ var SimpleStaticServer = function() {
     self.app.get("/getTweet/:userid", function(request, response) {
       var userid = request.params.userid;
       console.log("USER ID: " + userid);
-      client.get('statuses/user_timeline', {user_id: userid, count: 10, include_rts: false}, function(error, tweets, rawresponse) {
+      client.get('statuses/user_timeline', {user_id: userid, count: 10, include_rts: false, exclude_replies: true}, function(error, tweets, rawresponse) {
         if(error) throw error;
           var randomtweet = Math.floor((Math.random() * tweets.length));
           var tweet = tweets[randomtweet];
