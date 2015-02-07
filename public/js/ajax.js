@@ -41,6 +41,7 @@ function refresh(){
 // Sets a delay between AJAX call to get new tweet and user and update DOM
 function getUserTweetOnDelay(id) {
     setTimeout(function(){ 
+    	console.log("CLEAR!");
     	$(".flip-container").toggleClass('buttonclicked');
     	$("div#front").empty();
 		$("div#back").empty();
@@ -77,7 +78,9 @@ function insertChoices() {
 
 		} else { //last round over
 			$("div#theANSWERS").fadeOut();
+			$(".flip-container").hide();
 
+			$("div#theSCORE").toggleClass("vertalign");
 			$("div#theSCORE").append("<div id=\"theEND\" class=\"slideUp\"></div>");
 			$("div#theEND").append("<button id=\"refresh\"> Play again </button>");
 			$("div#theEND").append("<a class=\"twitter-share-button\"href=\"https://twitter.com/share\" data-text=\"I received " +score+ " points for TwitterQuizzer. How well do you know your friend? \"data-via=\"twitterdev\">Tweet</a><script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,\"script\",\"twitter-wjs\"));</script>");

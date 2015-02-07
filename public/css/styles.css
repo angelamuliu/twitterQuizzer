@@ -3,13 +3,17 @@ div#startpage {
 }
 
 .flipper {
-margin:150px;
-background: #F4F7D9;
-color: #3E423A;
-padding-bottom: 50px;
-padding-top: 50px;
-border-radius: 20px;
+  margin:150px;
+  background: #F4F7D9;
+  color: #3E423A;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border-radius: 20px;
+  border-bottom: 5px solid #D1D4BA;
+}
 
+div.flip-container div.row {
+  min-height: 450px;
 }
 
 div#theTWEET {
@@ -73,6 +77,13 @@ button.answer:active{
   font-size:20px;
   margin-top:10px;
 }
+
+.vertalign {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 
 
 a,
