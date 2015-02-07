@@ -43,6 +43,7 @@ score = 0;
 gamestart = false;
 gamerounds = 0;
 
+// Gets a single random tweet as a serverside response
 function getUserTweets(user_id) {
 	$.ajax({
 		url: '/getTweet/' + user_id,
@@ -50,7 +51,9 @@ function getUserTweets(user_id) {
 		// Update DOM with embeded tweet and choices
 		success: function(result) {
 			var tweet_text = JSON.parse(result).text;
+			parseTweet(tweet_text);
 			$("div#theTWEET").html(tweet_text);
+			$('div#theTWEET').linkify();
 			console.log(gamestart);
 			if (!gamestart) {
 				$("div#theSCORE").html("Score: " + score);
@@ -85,6 +88,9 @@ function insertChoices() {
 			getUserTweets(user.id);
 		}
 	});
+}
+
+function parseTweet(tweet_text) {
 }
 
 // From a list of users, cuts down the list into 4 users
