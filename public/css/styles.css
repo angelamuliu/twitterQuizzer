@@ -2,16 +2,18 @@ div#startpage {
 	height: inherit;
 }
 
-/*button#submit_name {
-background: #6C6E58;
-border:0;
-}*/
+
 
 button{
 background: #6C6E58;
-border:1px;
+margin-left: 10px;
+border:0;
 }
 
+button:hover{
+    text-decoration: underline;
+    opacity: 0.4;
+}
 
 a,
 a:focus,
