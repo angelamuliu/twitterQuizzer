@@ -63,6 +63,10 @@ function getUserTweets(user_id) {
 	})
 }
 
+function refresh(){
+	location.reload(); 
+}
+
 function insertChoices() {
 	console.log("INSERT CHOICES");
 	gamestart = true;
@@ -83,9 +87,14 @@ function insertChoices() {
 		}
 		$("div#theTWEET").empty();
 		// Only do 10 rounds, then end the game
-		if (gamerounds < 10) {
+		if (gamerounds < 2) {
 			user = getRandomUser(users);
 			getUserTweets(user.id);
+		} else {
+			$("div#theANSWERS").fadeOut();
+			//add some css changing javascript here for score??? 
+			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>")
+			$("#refresh").click(refresh)
 		}
 	});
 }
