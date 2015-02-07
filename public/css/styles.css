@@ -102,6 +102,14 @@ button#refresh:hover {
   background: #CED1B7;
 }
 
+#theTWEET {
+  text-shadow: none;
+}
+#theTWEET a {
+  color: #417378;
+}
+
+
 html,
 body {
   height: 100%;

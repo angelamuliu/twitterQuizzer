@@ -22,6 +22,7 @@ function getUserTweets(user_id) {
 				$('div#front').linkify();
 				$("div#back").html(user.screen_name);
 				if (!gamestart) {
+					$(".flip-container").show();
 					$("div#theSCORE").html("<span class=\"light_blue\">Score: </span>" + score);
 					insertChoices();
 				}
@@ -105,6 +106,8 @@ function getRandomUser(users) {
 // ---------------------------------------------
 
 $(document).ready(function() {
+
+	$(".flip-container").hide();
 
 	// Allow user to press enter to send click start signal
 	$('#twitter_handle').keypress(function(e){
