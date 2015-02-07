@@ -48,17 +48,12 @@ function getUserTweets(user_id) {
 		type: 'GET',
 		// Update DOM with embeded tweet and choices
 		success: function(result) {
-			console.log(result);
-			$("div#theTWEET").html(result);
+			var tweet_text = JSON.parse(result).text;
+			$("div#theTWEET").html(tweet_text);
 			console.log(gamestart);
 			if (!gamestart) {
 				insertChoices();
 			}
-			$("iframe").waitUntilExists(function() {
-				console.log("EXISTS!");
-				console.log($("iframe").contents().find('.header'));
-    			$("iframe").contents().find('.header').hide();
-    		}, false);
 		}
 	})
 }

@@ -53,11 +53,10 @@ var SimpleStaticServer = function() {
           console.log("TWEET: " + tweet);
           var tweetid = tweet.id_str;
           console.log("TWEETID: " + tweetid);
-          client.get('statuses/oembed', {id: tweetid}, function(error, oembedlink, rawresponse) {
-            console.log(oembedlink);
-            response.end(oembedlink.html);
-          })
-          // response.end(JSON.stringify(tweet));
+          response.end(JSON.stringify(tweet));
+          // client.get('statuses/oembed', {id: tweetid}, function(error, oembedlink, rawresponse) {
+          //   response.end(oembedlink.html);
+          // })
       });
     })
 
