@@ -14,6 +14,10 @@ span#h1_twitter {
   font-size:100px;
 }
 
+iframe#twitter-widget-0{
+margin-left: 30px;
+}
+
 button{
 background: #6C6E58;
 margin-left: 10px;
