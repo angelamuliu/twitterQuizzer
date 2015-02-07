@@ -7,6 +7,7 @@ user = "not set";
 score = 0;
 gamestart = false;
 gamerounds = 0;
+totalrounds = 5;
 
 // Gets a single random tweet as a serverside response
 function getUserTweets(user_id) {
@@ -67,11 +68,11 @@ function insertChoices() {
 		if (answer_id == user.id_str){
 			$("div#theSCORE").empty();
 			score +=1;
-			$("div#theSCORE").html("<span class=\"light_blue\">Score: </span>" + score);
+			$("div#theSCORE").html("<span class=\"light_blue\">Score: </span>" + score + "/"+totalrounds);
 		}
 		
 		// Only do n rounds, then end the game
-		if (gamerounds < 5) { //if there are more rounds left
+		if (gamerounds < totalrounds) { //if there are more rounds left
 			user = getRandomUser(users);
 			var id = user.id;
 			getUserTweetOnDelay(id); 
