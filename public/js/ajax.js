@@ -41,8 +41,9 @@ function insertChoices() {
 	gamestart = true;
 	// Appends four buttons with usernames that serve as choices
 	for (var i=0; i<users.length; i++) {
+		var iconhtml = "<span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> ";
 		var curuser = users[i][0];
-		$("div#theANSWERS").append("<button class=\"answer\" id=\"" + curuser.id_str + "\">" + curuser.screen_name + "</button>");
+		$("div#theANSWERS").append("<button class=\"answer\" id=\"" + curuser.id_str + "\">" + iconhtml + curuser.screen_name + "</button>");
 	}
 	// Listener that checks answer and also empties and resends AJAX request for next round
 	$(".answer").click(function() {
