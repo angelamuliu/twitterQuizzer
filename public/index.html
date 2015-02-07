@@ -6,6 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="js/jquery.linkify.min.js"></script>
   <script src="/js/ajax.js"></script>
+  <link rel="stylesheet" href="css/flip.css">
 </head>
 
 <body>
@@ -15,7 +16,14 @@
 		<button id="submit_name">Submit</button>
 	</div>
 
-	<div id="theTWEET"></div>
+<div class="flip-container">
+	<div class= "flipper">
+		<div id="theTWEET">
+			<div id="front"></div>
+			<div id="back"></div>
+		</div>
+	</div>
+</div>
 	<div id="theANSWERS"></div>
 	<div id="theSCORE"></div>
 
