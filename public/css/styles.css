@@ -2,7 +2,9 @@ div#startpage {
 	height: inherit;
 }
 
-
+iframe#twitter-widget-0{
+margin-left: 30px;
+}
 
 button{
 background: #6C6E58;
