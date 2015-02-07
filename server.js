@@ -34,16 +34,36 @@ var SimpleStaticServer = function() {
       console.log('%s: Node server started on %s:%d ...', Date(Date.now() ), self.ipaddress, self.port);
     });
 
-    self.app.get("/test", function(request, response) {
-      client.get('friends/ids', {screen_name: 'officialjaden'}, function(error, tweets, response){
+    self.app.get("/startGame/:name", function(request, response) {
+      var twitterhandle = request.params.name;
+      client.get('friends/list', {screen_name: twitterhandle}, function(error, friends, rawresponse) {
         if(error) throw error;
-          console.log(tweets);  // The friends
+          console.log(friends);
+          response.end(JSON.stringify(friends));
       });
+    })
 
-    });
+    self.app.get("/getTweet/:userid", function(request, response) {
+      var userid = request.params.userid;
+      console.log("USER ID: " + userid);
+      client.get('statuses/user_timeline', {user_id: userid, count: 10, include_rts: false}, function(error, tweets, rawresponse) {
+        if(error) throw error;
+          var randomtweet = Math.floor((Math.random() * tweets.length));
+          var tweet = tweets[randomtweet];
+          console.log("TWEET: " + tweet);
+          var tweetid = tweet.id_str;
+          console.log("TWEETID: " + tweetid);
+          client.get('statuses/oembed', {id: tweetid}, function(error, oembedlink, rawresponse) {
+            console.log(oembedlink);
+            response.end(oembedlink.html);
+          })
+          // response.end(JSON.stringify(tweet));
+      });
+    })
+
 
   };
-}; 
+};
 
 var sss = new SimpleStaticServer();
 sss.start();
