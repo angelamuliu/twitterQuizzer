@@ -68,6 +68,15 @@ function refresh(){
 	location.reload(); 
 }
 
+
+function getUserTweetOnDelay(id) {
+    setTimeout(function(){ 
+    	$(".flip-container").toggleClass('buttonclicked');
+    	$("div#front").empty();
+		$("div#back").empty();
+    	getUserTweets(id); }, 2000);
+}
+
 function insertChoices() {
 	console.log("INSERT CHOICES");
 	gamestart = true;
@@ -81,23 +90,29 @@ function insertChoices() {
 	$(".answer").click(function() {
 		gamerounds += 1;
 		var answer_id = $(this).attr('id');
+
+		$(".flip-container").toggleClass('buttonclicked');
+
 		if (answer_id == user.id_str){
 			$("div#theSCORE").empty();
 			score +=1;
 			$("div#theSCORE").html("Score: " + score);
 		}
-		$("div#front").empty();
-		$("div#back").empty();
+		
 		// Only do 10 rounds, then end the game
-		if (gamerounds < 5) {
+		if (gamerounds < 5) { //if there are more rounds left
 			user = getRandomUser(users);
-			getUserTweets(user.id);
-		} else {
+			var id = user.id;
+			getUserTweetOnDelay(id); 
+
+		} else { //last round over
 			$("div#theANSWERS").fadeOut();
 			//add some css changing javascript here for score??? 
-			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>")
-			$("#refresh").click(refresh)
+			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>");
+			$("#refresh").click(refresh);
 		}
+
+
 	});
 }
 
