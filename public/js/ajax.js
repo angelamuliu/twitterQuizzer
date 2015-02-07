@@ -43,6 +43,7 @@ score = 0;
 gamestart = false;
 gamerounds = 0;
 
+// Gets a single random tweet as a serverside response
 function getUserTweets(user_id) {
 	$.ajax({
 		url: '/getTweet/' + user_id,
@@ -50,7 +51,10 @@ function getUserTweets(user_id) {
 		// Update DOM with embeded tweet and choices
 		success: function(result) {
 			var tweet_text = JSON.parse(result).text;
-			$("div#theTWEET").html(tweet_text);
+			var username = JSON.parse(result).screen_name;
+			$("div#front").html(tweet_text);
+			$('div#front').linkify();
+			$("div#back").html(user.screen_name);
 			console.log(gamestart);
 			if (!gamestart) {
 				$("div#theSCORE").html("Score: " + score);
@@ -82,9 +86,10 @@ function insertChoices() {
 			score +=1;
 			$("div#theSCORE").html("Score: " + score);
 		}
-		$("div#theTWEET").empty();
+		$("div#front").empty();
+		$("div#back").empty();
 		// Only do 10 rounds, then end the game
-		if (gamerounds < 2) {
+		if (gamerounds < 5) {
 			user = getRandomUser(users);
 			getUserTweets(user.id);
 		} else {
