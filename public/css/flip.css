@@ -10,7 +10,6 @@
   }
 
 .flip-container, .front, .back {
-  width: 320px;
   height: 480px;
 }
 
@@ -18,17 +17,15 @@
 .flipper {
   transition: 0.6s;
   transform-style: preserve-3d;
-
+  padding: 150px;
+  padding-left: 200px;
+  padding-right: 200px;
   position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
   backface-visibility: hidden;
-
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 /* front pane, placed above back */
