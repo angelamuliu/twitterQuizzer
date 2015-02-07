@@ -37,6 +37,15 @@ function refresh(){
 	location.reload(); 
 }
 
+
+function getUserTweetOnDelay(id) {
+    setTimeout(function(){ 
+    	$(".flip-container").toggleClass('buttonclicked');
+    	$("div#front").empty();
+		$("div#back").empty();
+    	getUserTweets(id); }, 2000);
+}
+
 function insertChoices() {
 	gamestart = true;
 	// Appends four buttons with usernames that serve as choices
@@ -49,24 +58,29 @@ function insertChoices() {
 	$(".answer").click(function() {
 		gamerounds += 1;
 		var answer_id = $(this).attr('id');
+
+		$(".flip-container").toggleClass('buttonclicked');
+
 		if (answer_id == user.id_str){
 			$("div#theSCORE").empty();
 			score +=1;
 			$("div#theSCORE").html("Score: " + score);
 		}
-		$("div#front").empty();
-		$("div#back").empty();
+		
 		// Only do 10 rounds, then end the game
-		if (gamerounds < 5) {
+		if (gamerounds < 5) { //if there are more rounds left
 			user = getRandomUser(users);
-			getUserTweets(user.id);
-		} else {
+			var id = user.id;
+			getUserTweetOnDelay(id); 
+
+		} else { //last round over
 			$("div#theANSWERS").fadeOut();
-			//add some css changing javascript here for score??? 
 			$("div#theSCORE").append("<button id=\"refresh\"> Play again </button>")
 			$("div#theSCORE").append("<a class=\"twitter-share-button\"href=\"https://twitter.com/share\" data-text=\"I received " +score+ " points for TwitterQuizzer. How well do you know your friend? \"data-via=\"twitterdev\">Tweet</a><script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,\"script\",\"twitter-wjs\"));</script>")
 			$("#refresh").click(refresh)
 		}
+
+
 	});
 }
 
