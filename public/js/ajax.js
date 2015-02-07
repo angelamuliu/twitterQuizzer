@@ -99,9 +99,6 @@ function insertChoices() {
 	});
 }
 
-function parseTweet(tweet_text) {
-}
-
 // From a list of users, cuts down the list into 4 users
 function extractFour(users) {
 	updatedList = [];
